@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
     --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Set environment variables for Django
-ENV DJANGO_SETTINGS_MODULE ai-coder-be.settings
+ENV DJANGO_SETTINGS_MODULE ai_coder_be.settings
 
 # Set the working directory in the container
 WORKDIR /app
