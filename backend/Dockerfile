@@ -4,6 +4,12 @@ FROM python:3.8-slim-buster
 # Set the working directory in the Docker image
 WORKDIR /ai_coder_be
 
+# Install Django
+RUN pip install Django
+
+# Create a new Django project named ai_coder_be
+RUN django-admin startproject ai_coder_be .
+
 # Copy the requirements.txt file from your project directory (on your machine) to the Docker image
 COPY requirements.txt .
 
