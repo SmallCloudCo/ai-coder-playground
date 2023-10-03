@@ -19,10 +19,10 @@ RUN if [ ! -d ai_coder_be ]; then \
 FROM python:3.8-slim-buster
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /app/ai_coder_be
 
 # Copy the Django project from the builder image
-COPY --from=builder /app /app
+COPY --from=builder /app/ai_coder_be /app/ai_coder_be
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
