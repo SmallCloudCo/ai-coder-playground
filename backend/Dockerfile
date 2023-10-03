@@ -1,12 +1,5 @@
 # Use an official Python runtime as a parent image
-FROM python:3.8-slim-buster
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    gcc \
-    postgresql \
-    libpq-dev \
-    --no-install-recommends && rm -rf /var/lib/apt/lists/*
+FROM python:3.8-slim-buster as builder
 
 # Set the working directory in the container
 WORKDIR /app
@@ -21,6 +14,15 @@ RUN pip install --no-cache-dir -r requirements.txt
 RUN if [ ! -d ai_coder_be ]; then \
         django-admin startproject ai_coder_be . ; \
     fi
+
+# Use an official Python runtime as a parent image
+FROM python:3.8-slim-buster
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the Django project from the builder image
+COPY --from=builder /app /app
 
 # Make port 8000 available to the world outside this container
 EXPOSE 8000
