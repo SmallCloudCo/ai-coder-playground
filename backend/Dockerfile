@@ -22,7 +22,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Create new Django project if manage.py is not present
 RUN if [ ! -f manage.py ]; then \
-        django-admin startproject ai-coder-be . ; \
+        django-admin startproject ai_coder_be . ; \
     fi
 
 # Copy the current directory contents into the container
