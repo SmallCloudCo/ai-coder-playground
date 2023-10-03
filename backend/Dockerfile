@@ -8,9 +8,6 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-# Set environment variables for Django
-ENV DJANGO_SETTINGS_MODULE ai_coder_be.settings
-
 # Set the working directory in the container
 WORKDIR /app
 
@@ -20,11 +17,8 @@ COPY requirements.txt .
 # Install Django and other Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the current directory contents into the container
-COPY . /app
-
-# Create new Django project if manage.py is not present
-RUN if [ ! -f manage.py ]; then \
+# Create new Django project if it does not exist
+RUN if [ ! -d ai_coder_be ]; then \
         django-admin startproject ai_coder_be . ; \
     fi
 
